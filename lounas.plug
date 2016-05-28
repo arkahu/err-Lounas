@@ -1,0 +1,13 @@
+[Core]
+name = Lounas
+module = lounas
+
+[Documentation]
+description = Gets the lunch menu at at a certain restaurant for today.
+
+[Python]
+version = 3
+
+[Errbot]
+min = 4.1.3
+

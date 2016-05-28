@@ -15,7 +15,7 @@ class Lounas(BotPlugin):
             parsedMenu = json.loads(menu.text)
             menulist = []
             
-            #in case different amount of items, will create exception an
+            #in case different amount of items, will create an exception
             for i in range(0,5):
                 menulist.append(str(parsedMenu['MenusForDays'][0]['SetMenus'][i]['Components']))
         except:

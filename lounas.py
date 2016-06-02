@@ -17,9 +17,14 @@ class Lounas(BotPlugin):
             
             #in case different amount of items, will create an exception
             for i in range(0,5):
-                menulist.append(str(parsedMenu['MenusForDays'][0]['SetMenus'][i]['Components']))
+                menulist.append(parsedMenu['MenusForDays'][0]['SetMenus'][i]['Components'])
         except:
-            pass        
-        output =''.join(menulist)
+            pass       
+        
+        out_list = []
+        for counter, item in enumerate(menulist):
+            out_list.append(menulist[counter][0])
+
+        output = '\n'.join(out_list)
         
         return output

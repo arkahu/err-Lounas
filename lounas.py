@@ -1,5 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jun  3 18:10:11 2016
+
+@author: akharttu
+"""
+
 from errbot import BotPlugin, botcmd
 import requests, json
+
 
 class Lounas(BotPlugin):
     """Errbot plugin for getting the lunch menu for today at a certain  hardcoded restaurant. The restaurant is Amica Oulu VTT."""
@@ -21,10 +29,22 @@ class Lounas(BotPlugin):
         except:
             pass       
         
-        out_list = []
+        #remove useless stuff and format nicely
+        out_list_menu = []
         for counter, item in enumerate(menulist):
-            out_list.append(menulist[counter][0])
+            out_list_food = []
+            for counter2, item2 in enumerate(item):
+                food = menulist[counter][counter2]
+                cutlimit = food.find('(')
+                if cutlimit != -1:
+                    food = food[:cutlimit-1]
 
-        output = '\n'.join(out_list)
-        
+                out_list_food.append(food)
+                
+                
+            out_list_menu.append(', '.join(out_list_food))
+
+        output = '-' + '\n-'.join(out_list_menu)
+
         return output
+        

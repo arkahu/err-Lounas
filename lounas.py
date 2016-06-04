@@ -2,7 +2,7 @@
 """
 Created on Fri Jun  3 18:10:11 2016
 
-@author: akharttu
+Author: Arttu H., Oulu, Finland.
 """
 
 from errbot import BotPlugin, botcmd
@@ -35,13 +35,12 @@ class Lounas(BotPlugin):
             out_list_food = []
             for counter2, item2 in enumerate(item):
                 food = menulist[counter][counter2]
-                cutlimit = food.find('(')
+                #Remove the extra info in parenthesis                
+                cutlimit = food.find('(')  
                 if cutlimit != -1:
                     food = food[:cutlimit-1]
+                out_list_food.append(food)                                
 
-                out_list_food.append(food)
-                
-                
             out_list_menu.append(', '.join(out_list_food))
 
         output = '-' + '\n-'.join(out_list_menu)

@@ -3,6 +3,9 @@
 Created on Fri Jun  3 18:10:11 2016
 
 Author: Arttu H., Oulu, Finland.
+
+Version 0.2 2016.9.6
+Optional restaurants added.
 """
 
 from errbot import BotPlugin, botcmd
@@ -10,21 +13,30 @@ import requests, json
 
 
 class Lounas(BotPlugin):
-    """Errbot plugin for getting the lunch menu for today at a certain  hardcoded restaurant. The restaurant is Amica Oulu VTT."""
+    """Errbot plugin for getting the lunch menu for today at a certain  hardcoded restaurant."""
 
     @botcmd
     def lounas(self, msg, args):
         """Get webpage, parse and return"""
         
+        #defaults to Amica VTT Oulu.
+        url = "http://www.amica.fi/modules/json/json/Index?costNumber=3587&language=fi"
+        
+        #optional restaurants
+        if args == 'garden':
+            url = "http://www.amica.fi/modules/json/json/Index?costNumber=3497&language=fi"
+        elif args == 'smart':
+            url = "http://www.amica.fi/modules/json/json/Index?costNumber=3498&language=fi"
+            
+        
         try:
 
-            url = "http://www.amica.fi/modules/json/json/Index?costNumber=3587&language=fi"
             menu = requests.get(url)
             parsedMenu = json.loads(menu.text)
             menulist = []
             
             #in case different amount of items, will create an exception
-            for i in range(0,5):
+            for i in range(0,6):
                 menulist.append(parsedMenu['MenusForDays'][0]['SetMenus'][i]['Components'])
         except:
             pass       
